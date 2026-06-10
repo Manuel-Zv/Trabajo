@@ -25,3 +25,14 @@ export const GetEquipoById = async (req, res) => {
         res.status(500).json({ error: 'Error al obtener el equipo' });
     }
 };
+export const PostEquipo = async (req, res) => {
+    const { nombre, ciudad, pais, anio_fundacion } = req.body;   
+    try {
+        const nuevoEquipo = await Equipos.create({ nombre, ciudad, pais, anio_fundacion });
+        res.status(201).json(nuevoEquipo);
+    }
+    catch (error) {
+        console.error(`Error ${error}`);
+        res.status(500).json({ error: error.message || 'Error al crear el equipo' });
+    }
+};
